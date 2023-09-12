@@ -18,7 +18,8 @@ bot: Bot = Bot(token=config.tg_bot.token)
 @r.message(Command("cats"))
 async def sendcats(message: Message):
     async with aiohttp.ClientSession() as session:
-        async with session.get('https://api.thecatapi.com/v1/images/search') as cat_response:
+        url = 'https://api.thecatapi.com/v1/images/search'
+        async with session.get(url) as cat_response:
             if cat_response.status == 200:
                 cat_data = (await cat_response.json())[0]['url']
                 await bot.send_photo(message.chat.id, cat_data)
@@ -29,7 +30,8 @@ async def sendcats(message: Message):
 @r.message(Command("dogs"))
 async def senddogs(message: Message):
     async with aiohttp.ClientSession() as session:
-        async with session.get('https://random.dog/woof.json') as dog_response:
+        url = 'https://random.dog/woof.json'
+        async with session.get(url) as dog_response:
             if dog_response.status == 200:
                 dog_data = (await dog_response.json())['url']
                 await bot.send_photo(message.chat.id, dog_data)

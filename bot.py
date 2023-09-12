@@ -10,6 +10,7 @@ from handlers import user_handlers, other_handlers
 
 
 
+
 async def main():
     config_path = getenv('CONFIG')
     config = load_config(config_path)
@@ -17,7 +18,6 @@ async def main():
     dp: Dispatcher = Dispatcher()
     dp.include_router(user_handlers.r)
     dp.include_router(other_handlers.r)
-
     # await send_to_users() #функция отправки уведомлений пользователям, которые есть в бд
 
     await dp.start_polling(bot)
