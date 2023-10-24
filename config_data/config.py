@@ -7,17 +7,14 @@ from dotenv import load_dotenv
 
 @dataclass
 class DatabaseConfig:
-    database: str  # Название базы данных
-    db_host: str  # URL-адрес базы данных
-    db_user: str  # Username пользователя базы данных
-    db_password: str  # Пароль к базе данных
+    database_path: str
 
 
 @dataclass
 class TgBot:
-    token: str  # Токен для доступа к телеграм-боту
-    admin_ids: list[int]  # Список id администраторов бота
-
+    token: str
+    ai_key: str
+    creator_id: int
 
 @dataclass
 class Config:
@@ -25,13 +22,12 @@ class Config:
     db: DatabaseConfig
 
 
-def load_config(path: str = None) -> Config:
+def load_config() -> Config:
     load_dotenv()
-    bot_key = getenv("API_chatbot_KEY")
-    openai.api_key = getenv("API_openai_KEY")
-    return Config(tg_bot=TgBot(token=bot_key,
-                               admin_ids=list(map(int, getenv("ADMIN_IDS")))),
-                  db=DatabaseConfig(database=getenv("DATABASE"),
-                                    db_host=getenv('DB_HOST'),
-                                    db_user=getenv('DB_USER'),
-                                    db_password=getenv('DB_PASSWORD')))
+    # openai.api_key = getenv("API_openai_KEY")
+    return Config(tg_bot=TgBot(token=getenv("API_chatbot_KEY"),
+                               ai_key = getenv("API_openai_KEY"),
+                               creator_id = int(getenv("CREATOR_ID"))),
+                  db=DatabaseConfig(database_path=getenv("DATABASE_path")))
+
+

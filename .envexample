@@ -1,8 +1,4 @@
 API_openai_KEY =
 API_chatbot_KEY =
-DATABASE="database.db"
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-ADMIN_IDS=
-CONFIG =
+DATABASE_path =
+CREATOR_ID=

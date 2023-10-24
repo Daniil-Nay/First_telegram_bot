@@ -8,10 +8,9 @@ from aiogram.filters import Command
 from aiogram.types import Message, Sticker
 from config_data.config import load_config
 
-
 r: Router = Router()
 config_path = getenv('CONFIG')
-config = load_config(config_path)
+config = load_config()
 bot: Bot = Bot(token=config.tg_bot.token)
 
 
@@ -51,7 +50,7 @@ async def send_sticker(message: Sticker):
     try:
         await message.answer_sticker(message.sticker.file_id)
     except Exception as e:
-        await message.reply(f"Ошибка отправки стикера в ответ :(")
+        await message.reply(f"Ошибка отправки стикера в ответ :(", e)
 
 
 @r.message(F.text.lower().endswith('клоун?') | F.text.lower().endswith('клоунесса?'))
