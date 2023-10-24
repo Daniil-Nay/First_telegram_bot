@@ -17,8 +17,6 @@ class BanMiddleware(BaseMiddleware):
             try:
                 ban_duration = int(db_data[event.chat.id]['ban_duration'])
                 if ban_duration != 0:
-                    print("if even.chat.id successful", event.chat.id)
-                    print("I am in middleware")
                     await event.reply("Вы были забанены")
                 else:
                     return await handler(event, data)
